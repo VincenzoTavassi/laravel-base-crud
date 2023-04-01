@@ -13,7 +13,7 @@
                     <br><strong>Autore:</strong> {{$song->author}}
                     @if ($song->editor)<br><strong>Editor:</strong> {{$song->editor}}@endif
                 </p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="{{route('songs.index')}}" class="btn btn-primary">Torna alla lista</a>
             </div>
         </div>
     </div>

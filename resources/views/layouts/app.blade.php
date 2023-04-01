@@ -8,6 +8,9 @@
     <title>@yield('title')</title>
 </head>
 <body>
+    <header>
+        @include('partials._navbar')
+    </header>
     <main>
     <div class="container">
         <h1 class="my-3 text-center">@yield('title')</h1>

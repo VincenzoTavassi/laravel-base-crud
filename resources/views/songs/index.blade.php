@@ -3,21 +3,34 @@
 @section('title', 'Lista Canzoni')
 
 @section('main-content')
-<div class="row row-cols-4">
-    <div class="col">
-        @foreach ($songs as $song)   
-        <div class="card h-100">
-            <img src="{{$song->poster}}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">{{$song->title}} - Album: {{$song->album}}</h5>
-                <p class="card-text"><strong>Durata:</strong> {{$song->getMinutes()}} minuti
-                    <br><strong>Autore:</strong> {{$song->author}}
-                    @if ($song->editor)<br><strong>Editor:</strong> {{$song->editor}}@endif
-                </p>
-                <a href="{{route('songs.show', ['song' => $song])}}" class="btn btn-primary">Go somewhere</a>
-            </div>
-        </div>
-    </div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Titolo</th>
+      <th scope="col">Album</th>
+      <th scope="col">Autore</th>     
+      <th scope="col">Editor</th>
+      <th scope="col">Durata</th>
+      <th scope="col">Dettaglio</th>
+
+    </tr>
+  </thead>
+  <tbody>
+@foreach ($songs as $song)   
+    <tr>
+      <th scope="row">{{$song->id}}</th>
+      <td>{{$song->title}}</td>
+      <td>{{$song->album}}</td>
+      <td>{{$song->author}}</td>
+      <td>{{$song->editor}}</td>
+      <td>{{$song->getMinutes()}} minuti</td>
+     <td><a href="{{route('songs.show', ['song' => $song])}}">Dettaglio</a></td>
+
+    </tr>
     @endforeach
-</div>
+  </tbody>
+</table>
+
 @endsection
