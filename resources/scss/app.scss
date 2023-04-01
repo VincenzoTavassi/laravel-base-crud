@@ -6,4 +6,11 @@
 
 img {
     max-width: 500px;
+    &.thumbnail {
+        max-width: 50px;
+    }
+}
+
+tr {
+    vertical-align: middle;
 }
