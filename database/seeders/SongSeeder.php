@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Song;
+use Faker\Generator as Faker;
 
 class SongSeeder extends Seeder
 {
@@ -13,20 +14,17 @@ class SongSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        $song = new Song;
-        $song->title = "Una canzone di test";
-        $song->length = 300;
-        $song->save();
-
-        $song = new Song;
-        $song->title = "Un'altra canzone";
-        $song->album = "L'album migliore";
-        $song->author = "Bravissimo autore";
-        $song->editor = "Editor d'eccezione";
-        $song->length = 150;
-        $song->poster = "https://picsum.photos/200/300";
-        $song->save();
+        for ($i = 0; $i < 50; $i++) {
+            $song = new Song;
+            $song->title = $faker->sentence(3);
+            $song->album = $faker->words(5, true);
+            $song->author = $faker->name();
+            $song->author = $faker->name();
+            $song->length = $faker->numberBetween(30, 2000);;
+            $song->poster = "https://picsum.photos/200/300?random=" . $faker->unique()->numberBetween(1, $i);
+            $song->save();
+        }
     }
 }
