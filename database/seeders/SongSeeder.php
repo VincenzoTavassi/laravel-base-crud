@@ -21,7 +21,6 @@ class SongSeeder extends Seeder
             $song->title = $faker->sentence(3);
             $song->album = $faker->words(5, true);
             $song->author = $faker->name();
-            $song->author = $faker->name();
             $song->length = $faker->numberBetween(30, 2000);
             $song->poster = "https://picsum.photos/200/300?random=" . $faker->unique()->numberBetween(1, $i);
             $song->description = $faker->sentence(20);

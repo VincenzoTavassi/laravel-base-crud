@@ -3,6 +3,9 @@
 @section('title', 'Lista Canzoni')
 
 @section('main-content')
+<div class="d-flex">
+<a class="btn btn-dark ms-auto my-2" href="{{route('songs.create')}}">Aggiungi una canzone</a>
+</div>
 
 <table class="table table-striped">
   <thead>

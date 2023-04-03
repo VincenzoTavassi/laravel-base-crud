@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Song extends Model
 {
+    protected $fillable = ["title", "album", "author", "length", "poster", "description"];
     use HasFactory;
     public function getMinutes()
     {
