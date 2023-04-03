@@ -11,7 +11,7 @@
                 <h5 class="card-title">{{$song->title}} - Album: {{$song->album}}</h5>
                 <p class="card-text"><strong>Durata:</strong> {{$song->getMinutes()}} minuti
                     <br><strong>Autore:</strong> {{$song->author}}
-                    @if ($song->editor)<br><strong>Editor:</strong> {{$song->editor}}@endif
+                   @if ($song->editor) <br><strong>Editor:</strong> {{$song->editor}} @endif
                 </p>
                 <p><strong>Descrizione: </strong>{{$song->description}}</p>
                 <a href="{{route('songs.index')}}" class="btn btn-primary">Torna alla lista</a>

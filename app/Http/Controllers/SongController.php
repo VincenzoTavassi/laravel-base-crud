@@ -36,6 +36,24 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
+
+        // VALIDATION
+        $this->validate($request, [
+            'title' => 'required|max:150',
+            'album' => 'max:100',
+            'author' => 'max:100',
+            'editor' => 'max:100',
+            'length' => 'required|integer'
+        ], [
+            'title' => "Il titolo è un campo obbligatorio.",
+            'album' => ":attribute - Massimo :max caratteri",
+            'author' => ":attribute - Massimo :max caratteri",
+            'editor' => ":attribute - Massimo :max caratteri",
+            'length' => "La durata in secondi deve essere presente ed essere un numero valido"
+        ]);
+
+
+        // EXECUTION
         $data = $request->all();
         $song = new Song;
         $song->fill($data);

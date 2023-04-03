@@ -4,15 +4,25 @@
 
 @section('main-content')
 
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <form class="row g-3" method="POST" action="{{route('songs.store')}}">
   @csrf
   
-    <div class="col-md-4">
+    <div class="col-md-5">
     <label for="title" class="form-label">Titolo</label>
     <input type="text" name="title" class="form-control" id="title">
   </div>
 
-    <div class="col-md-4">
+    <div class="col-md-5">
     <label for="album" class="form-label">Album</label>
     <input type="text" name="album" class="form-control" id="album">
   </div>
@@ -22,12 +32,17 @@
     <input type="text" name="author" class="form-control" id="author">
   </div>
 
+      <div class="col-md-5">
+    <label for="editor" class="form-label">Editor</label>
+    <input type="text" name="editor" class="form-control" id="editor">
+  </div>
+
     <div class="col-md-3">
     <label for="length" class="form-label">Durata (in secondi)</label>
     <input type="number" name="length" class="form-control" id="length">
   </div>
 
-    <div class="col-md-5">
+    <div class="col-md-7">
     <label for="poster" class="form-label">Immagine</label>
     <input type="text" name="poster" class="form-control" id="poster">
   </div>
