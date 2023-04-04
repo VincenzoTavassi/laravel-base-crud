@@ -78,9 +78,9 @@ class SongController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Song $song)
     {
-        //
+        return view('songs.edit', compact('song'));
     }
 
     /**
@@ -90,9 +90,27 @@ class SongController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Song $song)
     {
-        //
+        // VALIDATION
+        $this->validate($request, [
+            'title' => 'required|max:150',
+            'album' => 'max:100',
+            'author' => 'max:100',
+            'editor' => 'max:100',
+            'length' => 'required|integer'
+        ], [
+            'title' => "Il titolo è un campo obbligatorio.",
+            'album' => ":attribute - Massimo :max caratteri",
+            'author' => ":attribute - Massimo :max caratteri",
+            'editor' => ":attribute - Massimo :max caratteri",
+            'length' => "La durata in secondi deve essere presente ed essere un numero valido"
+        ]);
+
+        // EXECUTION
+        $data = $request->all();
+        $song->update($data);
+        return redirect()->route('songs.show', $song);
     }
 
     /**

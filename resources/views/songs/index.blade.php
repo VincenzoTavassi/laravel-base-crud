@@ -31,7 +31,11 @@
       <td>{{$song->author}}</td>
       <td>{{$song->editor}}</td>
       <td>{{$song->getMinutes()}} minuti</td>
-     <td><a href="{{route('songs.show', ['song' => $song])}}">Dettaglio</a></td>
+     <td>
+      <a href="{{route('songs.show', ['song' => $song])}}">Dettaglio</a>
+      <a href="{{route('songs.edit', ['song' => $song])}}">Modifica</a>
+
+    </td>
 
     </tr>
     @endforeach
