@@ -1,5 +1,15 @@
 @import "~bootstrap/scss/bootstrap";
 
+.page-link.active,
+.active > .page-link {
+    border-color: black;
+    background-color: black;
+}
+
+.page-link {
+    color: black;
+}
+
 .jumbotron {
     min-height: 100vh;
 }
