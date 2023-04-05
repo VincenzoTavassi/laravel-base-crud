@@ -34,13 +34,9 @@
      <td>
       <a href="{{route('songs.show', ['song' => $song])}}">Dettaglio</a>
       <a href="{{route('songs.edit', ['song' => $song])}}">Modifica</a>
-      <form action="{{route('songs.destroy', ['song' => $song])}}" method="POST">
-        @csrf
-        @method('DELETE')
-        <input type="hidden" name="page" value="{{$songs->currentPage()}}">
-        <button>Cancella</button>
-        </form>
-
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-song-id="{{$song->id}}" data-bs-song-title="{{$song->title}}">
+  Elimina
+</button>
     </td>
 
     </tr>
@@ -50,28 +46,45 @@
 </table>
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="deleteModal">
-  Launch demo modal
-</button>
-
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Conferma cancellazione</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
-      </div>
+Sei sicuro di voler cancellare 
+</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+        <form id="delete" action="{{route('songs.destroy', ['song' => $song])}}" method="POST">
+          @csrf @method('DELETE')
+          <input type="hidden" name="page" value="{{$songs->currentPage()}}">
+          <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-song-id="{{$song->id}}">
+          Conferma</button>
+</form>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+const exampleModal = document.getElementById('deleteModal')
+
+exampleModal.addEventListener('show.bs.modal', event => {
+  // Button that triggered the modal
+  const button = event.relatedTarget
+  // Estraggo ID e Titolo della canzone selezionata
+  const songID = button.getAttribute('data-bs-song-id')
+  const songTitle = button.getAttribute('data-bs-song-title')
+  // Body della modal
+  const modalBodyInput = exampleModal.querySelector('.modal-body')
+  // Modifico l'action del Form in base all'ID
+  const form = document.getElementById('delete')
+  form.action = `/songs/${songID}`;
+  modalBodyInput.innerHTML = `Sei sicuro di voler cancellare la canzone <strong>${songTitle}</strong> con ID <strong>${songID}</strong>?`
+})</script>
 
 @endsection
