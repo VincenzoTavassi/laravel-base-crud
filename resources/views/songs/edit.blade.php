@@ -55,6 +55,7 @@
 
   <div class="col-12">
     <button type="submit" class="btn btn-dark">Modifica Canzone</button>
+    <a href="{{route('songs.index')}}" class="btn btn-dark">Torna alla lista</a>
   </div>
 </form>
 

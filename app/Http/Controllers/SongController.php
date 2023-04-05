@@ -125,7 +125,7 @@ class SongController extends Controller
 
         // Redirect all'ultima pagina disponibile
         $paginator = Song::paginate(10);
-        // Se la pagina del $request non è l'ultima disponibile, redirect all'ultima
+        // Se la pagina del $request è minore uguale all'ultima disponibile OK, altrimenti redirect all'ultima disponibile
         $redirectToPage = ($request->page <= $paginator->lastPage()) ? $request->page : $paginator->lastPage();
         return redirect()->route('songs.index', ['page' => $redirectToPage]);
     }
