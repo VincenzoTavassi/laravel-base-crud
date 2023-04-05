@@ -17,7 +17,7 @@
       <th scope="col">Autore</th>     
       <th scope="col">Editor</th>
       <th scope="col">Durata</th>
-      <th scope="col">Dettaglio</th>
+      <th scope="col">Azioni</th>
 
     </tr>
   </thead>
@@ -32,11 +32,9 @@
       <td>{{$song->editor}}</td>
       <td>{{$song->getMinutes()}} minuti</td>
      <td>
-      <a href="{{route('songs.show', ['song' => $song])}}">Dettaglio</a>
-      <a href="{{route('songs.edit', ['song' => $song])}}">Modifica</a>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-song-id="{{$song->id}}" data-bs-song-title="{{$song->title}}">
-  Elimina
-</button>
+      <a href="{{route('songs.show', ['song' => $song])}}"><i class="bi bi-info-square-fill text-dark"></i></a>
+      <a href="{{route('songs.edit', ['song' => $song])}}"><i class="bi bi-pencil-square text-dark"></i></a>
+<i class="bi bi-trash3-fill text-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-song-id="{{$song->id}}" data-bs-song-title="{{$song->title}}"></i>
     </td>
 
     </tr>
@@ -73,6 +71,8 @@ Sei sicuro di voler cancellare
 <script>
 const exampleModal = document.getElementById('deleteModal')
 
+console.log(window.location.href)
+
 exampleModal.addEventListener('show.bs.modal', event => {
   // Button that triggered the modal
   const button = event.relatedTarget
@@ -83,7 +83,7 @@ exampleModal.addEventListener('show.bs.modal', event => {
   const modalBodyInput = exampleModal.querySelector('.modal-body')
   // Modifico l'action del Form in base all'ID
   const form = document.getElementById('delete')
-  form.action = `/songs/${songID}`;
+  form.action = `${window.location.pathname}/${songID}`;
   modalBodyInput.innerHTML = `Sei sicuro di voler cancellare la canzone <strong>${songTitle}</strong> con ID <strong>${songID}</strong>?`
 })</script>
 
