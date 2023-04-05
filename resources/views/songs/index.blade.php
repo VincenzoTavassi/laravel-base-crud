@@ -34,11 +34,18 @@
      <td>
       <a href="{{route('songs.show', ['song' => $song])}}">Dettaglio</a>
       <a href="{{route('songs.edit', ['song' => $song])}}">Modifica</a>
+      <form action="{{route('songs.destroy', ['song' => $song])}}" method="POST">
+        @csrf
+        @method('DELETE')
+        <input type="hidden" name="page" value="{{$songs->currentPage()}}">
+        <button>Cancella</button>
+        </form>
 
     </td>
 
     </tr>
     @endforeach
+    {{ $songs->links('pagination::bootstrap-5') }}
   </tbody>
 </table>
 

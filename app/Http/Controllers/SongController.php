@@ -14,7 +14,7 @@ class SongController extends Controller
      */
     public function index()
     {
-        $songs = Song::all();
+        $songs = Song::paginate(10);
         return view('songs.index', compact('songs'));
     }
 
@@ -119,8 +119,14 @@ class SongController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Song $song)
     {
-        //
+        $song->delete();
+
+        // Redirect all'ultima pagina disponibile
+        $paginator = Song::paginate(10);
+        // Se la pagina del $request non è l'ultima disponibile, redirect all'ultima
+        $redirectToPage = ($request->page <= $paginator->lastPage()) ? $request->page : $paginator->lastPage();
+        return redirect()->route('songs.index', ['page' => $redirectToPage]);
     }
 }
